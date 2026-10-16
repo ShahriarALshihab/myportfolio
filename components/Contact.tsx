@@ -294,7 +294,7 @@ export default function Contact() {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Jane Doe"
+                      placeholder=""
                       className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-xs sm:text-sm"
                     />
                   </div>
