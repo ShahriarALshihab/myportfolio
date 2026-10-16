@@ -25,7 +25,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.15 }}
       whileHover={{ y: -6, scale: 1.015 }}
       onClick={handleCardClick}
-      className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-[#161b27]/80 backdrop-blur-xl p-6 sm:p-7 shadow-lg shadow-black/5 dark:shadow-blue-950/20 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 cursor-pointer overflow-hidden"
+      className="group relative flex flex-col justify-between rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-[#161b27]/80 backdrop-blur-xl p-5 sm:p-7 shadow-lg shadow-black/5 dark:shadow-blue-950/20 hover:border-blue-500/50 dark:hover:border-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300 cursor-pointer overflow-hidden"
     >
       {/* Top subtle glow strip */}
       <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-[#4f8ef7] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -70,7 +70,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
 
       {/* Action Buttons Row */}
       <div
-        className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex items-center justify-between gap-3 mt-auto"
+        className="pt-4 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center gap-2 mt-auto"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Live Demo Link */}
@@ -78,54 +78,56 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
           href={project.liveUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] hover:opacity-90 shadow-md shadow-blue-500/20 transition-all"
+          className="flex-1 min-w-[120px] inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-white bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] hover:opacity-90 shadow-md shadow-blue-500/20 transition-all"
           aria-label={`Visit live demo for ${project.title}`}
         >
-          <FiExternalLink className="w-3.5 h-3.5" />
+          <FiExternalLink className="w-3.5 h-3.5 shrink-0" />
           <span>Live Demo</span>
         </a>
 
         {/* GitHub Repository Links */}
-        {project.githubRepo && (
-          <a
-            href={project.githubRepo}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
-            aria-label={`View GitHub repository for ${project.title}`}
-          >
-            <FiGithub className="w-4 h-4" />
-            <span>Code</span>
-          </a>
-        )}
+        <div className="flex items-center gap-2 shrink-0">
+          {project.githubRepo && (
+            <a
+              href={project.githubRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs sm:text-sm font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
+              aria-label={`View GitHub repository for ${project.title}`}
+            >
+              <FiGithub className="w-4 h-4" />
+              <span>Code</span>
+            </a>
+          )}
 
-        {project.clientRepo && (
-          <a
-            href={project.clientRepo}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Client Repository"
-            className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
-            aria-label={`View Client Code for ${project.title}`}
-          >
-            <FiGithub className="w-3.5 h-3.5" />
-            <span>Client</span>
-          </a>
-        )}
+          {project.clientRepo && (
+            <a
+              href={project.clientRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Client Repository"
+              className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
+              aria-label={`View Client Code for ${project.title}`}
+            >
+              <FiGithub className="w-3.5 h-3.5" />
+              <span>Client</span>
+            </a>
+          )}
 
-        {project.serverRepo && (
-          <a
-            href={project.serverRepo}
-            target="_blank"
-            rel="noopener noreferrer"
-            title="Server Repository"
-            className="inline-flex items-center justify-center gap-1 px-3 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
-            aria-label={`View Server Code for ${project.title}`}
-          >
-            <FiGithub className="w-3.5 h-3.5" />
-            <span>Server</span>
-          </a>
-        )}
+          {project.serverRepo && (
+            <a
+              href={project.serverRepo}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Server Repository"
+              className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-2 rounded-xl text-xs font-semibold border border-slate-300 dark:border-slate-700 bg-white/70 dark:bg-[#1e2535] text-slate-700 dark:text-slate-200 hover:border-blue-500/50 hover:text-blue-500 transition-all"
+              aria-label={`View Server Code for ${project.title}`}
+            >
+              <FiGithub className="w-3.5 h-3.5" />
+              <span>Server</span>
+            </a>
+          )}
+        </div>
       </div>
     </motion.div>
   );

@@ -11,26 +11,26 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative bg-white/70 dark:bg-[#0a0a0f] border-t border-slate-200/80 dark:border-slate-800/80 pt-16 pb-12 overflow-hidden transition-colors">
-      {/* Gradient Top Border Line */}
+    <footer className="relative bg-white/70 dark:bg-[#0a0a0f] border-t border-slate-200/80 dark:border-slate-800/80 pt-12 pb-8 sm:pt-16 sm:pb-12 overflow-hidden transition-colors">
+
       <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#4f8ef7] to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8 pb-12 border-b border-slate-200 dark:border-slate-800/80">
-          {/* Logo & Tagline */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 sm:gap-8 pb-8 sm:pb-12 border-b border-slate-200 dark:border-slate-800/80">
+
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <Link
               href="/#home"
-              className="flex items-center gap-2 text-xl font-bold tracking-tight mb-2 group"
+              className="flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight mb-2 group"
             >
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-[#4f8ef7] to-[#8b5cf6] p-[1.5px] shadow-sm">
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-[#4f8ef7] to-[#8b5cf6] p-[1.5px] shadow-sm">
                 <div className="w-full h-full bg-white dark:bg-[#0d1117] rounded-[10px] flex items-center justify-center">
-                  <span className="font-mono text-sm font-extrabold bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] bg-clip-text text-transparent">
+                  <span className="font-mono text-xs sm:text-sm font-extrabold bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] bg-clip-text text-transparent">
                     SA
                   </span>
                 </div>
               </div>
-              <span className="font-mono text-lg font-bold tracking-wide text-slate-900 dark:text-white">
+              <span className="font-mono text-base sm:text-lg font-bold tracking-wide text-slate-900 dark:text-white">
                 Shahriar<span className="text-[#4f8ef7]">.dev</span>
               </span>
             </Link>
@@ -40,8 +40,8 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Quick Nav Links */}
-          <nav className="flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-slate-600 dark:text-slate-400">
+
+          <nav className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-6 text-xs sm:text-sm font-medium text-slate-600 dark:text-slate-400">
             <a
               href="/#home"
               className="hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
@@ -80,7 +80,7 @@ export default function Footer() {
             </a>
           </nav>
 
-          {/* Social Icons & Back to Top */}
+
           <div className="flex items-center gap-4">
             <a
               href="https://github.com/ShahriarALshihab"
@@ -101,7 +101,7 @@ export default function Footer() {
               <FaLinkedin className="w-5 h-5" />
             </a>
 
-            {/* Scroll to Top Button */}
+
             <button
               onClick={scrollToTop}
               id="footer-back-to-top"
@@ -113,7 +113,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright & Disclaimer */}
+
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 dark:text-slate-400 gap-4">
           <p>© 2026 Shahriar Al Shihab. All rights reserved.</p>
           <p className="flex items-center gap-1.5">

@@ -40,27 +40,49 @@ export default function Contact() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // TODO: Integrate EmailJS or Nodemailer for real email delivery
-    await new Promise((resolve) => setTimeout(resolve, 1200));
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: "0cf20d68-80a4-4fbf-9be5-59d75894fec3",
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
+      });
 
-    setIsSubmitting(false);
-    setSubmitted(true);
-    setFormData({ name: "", email: "", subject: "", message: "" });
+      const result = await response.json();
 
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 6000);
+      if (result.success) {
+        setSubmitted(true);
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        alert("Failed to send message: " + (result.message || "Please try again."));
+      }
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+      setTimeout(() => {
+        setSubmitted(false);
+      }, 6000);
+    }
   };
 
   return (
-    <section id="contact" className="py-20 sm:py-28 relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-28 relative overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute top-1/3 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
+        <div className="flex flex-col items-center text-center mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,7 +98,7 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white"
+            className="text-2xl sm:text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white"
           >
             Get In{" "}
             <span className="bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] bg-clip-text text-transparent">
@@ -97,47 +119,47 @@ export default function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.25 }}
-            className="mt-4 max-w-xl text-sm sm:text-base text-slate-600 dark:text-slate-400"
+            className="mt-4 max-w-xl text-xs sm:text-base text-slate-600 dark:text-slate-400"
           >
             Have a project in mind, an opportunity to discuss, or just want to say hi? Feel free to
             reach out directly or send a message below.
           </motion.p>
         </div>
 
-        {/* Both Sides Animate on Scroll */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        {/* Responsive Grid Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Left Column: Contact Info Cards */}
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-5 flex flex-col justify-between space-y-6"
+            className="lg:col-span-5 flex flex-col justify-between space-y-5 sm:space-y-6"
           >
-            <div className="space-y-4">
-              <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-2">
+            <div className="space-y-3.5 sm:space-y-4">
+              <h3 className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white mb-1.5 sm:mb-2">
                 Contact Information
               </h3>
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-6">
+              <p className="text-xs sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed mb-4 sm:mb-6">
                 I am actively seeking full-time opportunities, high-impact collaborations, and
                 contract projects. Let&apos;s build something great together.
               </p>
 
               {/* Email Card with Copy button */}
-              <div className="group relative p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl hover:border-blue-500/50 transition-all duration-300 shadow-sm flex items-center justify-between gap-4">
+              <div className="group relative p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl hover:border-blue-500/50 transition-all duration-300 shadow-sm flex items-center justify-between gap-3">
                 <a
                   href="mailto:shahriar.al.shihab@gmail.com"
                   id="contact-email-link"
-                  className="flex items-center gap-4 flex-1 min-w-0"
+                  className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 dark:from-blue-500/20 dark:to-indigo-500/20 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 transition-transform">
-                    <FiMail className="w-5 h-5" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-blue-500/10 to-indigo-500/10 dark:from-blue-500/20 dark:to-indigo-500/20 border border-blue-500/20 flex items-center justify-center text-blue-600 dark:text-blue-400 shrink-0 group-hover:scale-110 transition-transform">
+                    <FiMail className="w-4 h-4 sm:w-5 sm:h-5" />
                   </div>
-                  <div className="min-w-0">
-                    <span className="text-xs font-mono uppercase text-slate-400 dark:text-slate-500">
+                  <div className="min-w-0 flex-1">
+                    <span className="text-[11px] font-mono uppercase text-slate-400 dark:text-slate-500">
                       Email
                     </span>
-                    <p className="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    <p className="text-xs sm:text-base font-semibold text-slate-800 dark:text-slate-200 truncate group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                       shahriar.al.shihab@gmail.com
                     </p>
                   </div>
@@ -161,31 +183,31 @@ export default function Contact() {
               <a
                 href="tel:+8801750617596"
                 id="contact-phone-link"
-                className="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl hover:border-blue-500/50 transition-all duration-300 shadow-sm flex items-center gap-4"
+                className="group p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl hover:border-blue-500/50 transition-all duration-300 shadow-sm flex items-center gap-3 sm:gap-4"
               >
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-emerald-500/10 to-teal-500/10 dark:from-emerald-500/20 dark:to-teal-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
-                  <FiPhone className="w-5 h-5" />
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-emerald-500/10 to-teal-500/10 dark:from-emerald-500/20 dark:to-teal-500/20 border border-emerald-500/20 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0 group-hover:scale-110 transition-transform">
+                  <FiPhone className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono uppercase text-slate-400 dark:text-slate-500">
+                  <span className="text-[11px] font-mono uppercase text-slate-400 dark:text-slate-500">
                     Phone
                   </span>
-                  <p className="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 transition-colors">
+                  <p className="text-xs sm:text-base font-semibold text-slate-800 dark:text-slate-200 group-hover:text-emerald-500 transition-colors">
                     +880 1750617596
                   </p>
                 </div>
               </a>
 
               {/* Location Card */}
-              <div className="group p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl transition-all duration-300 shadow-sm flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-purple-500/10 to-pink-500/10 dark:from-purple-500/20 dark:to-pink-500/20 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
-                  <FiMapPin className="w-5 h-5" />
+              <div className="group p-4 sm:p-5 rounded-2xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/80 backdrop-blur-xl transition-all duration-300 shadow-sm flex items-center gap-3 sm:gap-4">
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-tr from-purple-500/10 to-pink-500/10 dark:from-purple-500/20 dark:to-pink-500/20 border border-purple-500/20 flex items-center justify-center text-purple-600 dark:text-purple-400 shrink-0 group-hover:scale-110 transition-transform">
+                  <FiMapPin className="w-4 h-4 sm:w-5 sm:h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono uppercase text-slate-400 dark:text-slate-500">
+                  <span className="text-[11px] font-mono uppercase text-slate-400 dark:text-slate-500">
                     Location
                   </span>
-                  <p className="text-sm sm:text-base font-semibold text-slate-800 dark:text-slate-200">
+                  <p className="text-xs sm:text-base font-semibold text-slate-800 dark:text-slate-200">
                     Dhaka, Bangladesh
                   </p>
                 </div>
@@ -197,14 +219,14 @@ export default function Contact() {
               <span className="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-3">
                 Connect On Social Platforms
               </span>
-              <div className="flex items-center gap-3">
+              <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3">
                 <a
                   href="https://www.linkedin.com/in/shahriar-al-shihab"
                   target="_blank"
                   rel="noopener noreferrer"
                   id="contact-linkedin-btn"
                   aria-label="LinkedIn profile"
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white/70 dark:bg-[#161b27] text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all font-medium text-sm shadow-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white/70 dark:bg-[#161b27] text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all font-medium text-xs sm:text-sm shadow-sm"
                 >
                   <FaLinkedin className="w-4 h-4 text-[#0077b5]" />
                   <span>LinkedIn</span>
@@ -216,7 +238,7 @@ export default function Contact() {
                   rel="noopener noreferrer"
                   id="contact-github-btn"
                   aria-label="GitHub profile"
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white/70 dark:bg-[#161b27] text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all font-medium text-sm shadow-sm"
+                  className="flex-1 inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-white/70 dark:bg-[#161b27] text-slate-700 dark:text-slate-200 hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-500/50 transition-all font-medium text-xs sm:text-sm shadow-sm"
                 >
                   <SiGithub className="w-4 h-4" />
                   <span>GitHub</span>
@@ -227,13 +249,13 @@ export default function Contact() {
 
           {/* Right Column: Contact Form */}
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-7"
           >
-            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-[#161b27]/80 backdrop-blur-2xl p-7 sm:p-10 shadow-xl shadow-black/5 dark:shadow-blue-950/20 relative">
+            <div className="rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/80 dark:bg-[#161b27]/80 backdrop-blur-2xl p-5 sm:p-8 md:p-10 shadow-xl shadow-black/5 dark:shadow-blue-950/20 relative">
               {/* Success Notification Alert */}
               <AnimatePresence>
                 {submitted && (
@@ -245,7 +267,7 @@ export default function Contact() {
                     role="alert"
                   >
                     <FiCheckCircle className="w-6 h-6 text-emerald-500 shrink-0" />
-                    <div className="text-sm">
+                    <div className="text-xs sm:text-sm">
                       <p className="font-bold">Message sent successfully!</p>
                       <p className="opacity-90">
                         Thank you for reaching out. Shahriar will get back to you shortly.
@@ -255,13 +277,13 @@ export default function Contact() {
                 )}
               </AnimatePresence>
 
-              <form onSubmit={handleSubmit} className="space-y-5" id="contact-form">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5" id="contact-form">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                   {/* Name field */}
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-2"
+                      className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-1.5 sm:mb-2"
                     >
                       Your Name <span className="text-blue-500">*</span>
                     </label>
@@ -273,7 +295,7 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Jane Doe"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-xs sm:text-sm"
                     />
                   </div>
 
@@ -281,7 +303,7 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="contact-email-input"
-                      className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-2"
+                      className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-1.5 sm:mb-2"
                     >
                       Your Email <span className="text-blue-500">*</span>
                     </label>
@@ -293,7 +315,7 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="jane@example.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
+                      className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-xs sm:text-sm"
                     />
                   </div>
                 </div>
@@ -302,7 +324,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="contact-subject"
-                    className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-2"
+                    className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-1.5 sm:mb-2"
                   >
                     Subject <span className="text-blue-500">*</span>
                   </label>
@@ -314,7 +336,7 @@ export default function Contact() {
                     value={formData.subject}
                     onChange={handleChange}
                     placeholder="Project Inquiry / Job Opportunity"
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm"
+                    className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-xs sm:text-sm"
                   />
                 </div>
 
@@ -322,7 +344,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="contact-message"
-                    className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-2"
+                    className="block text-xs font-mono uppercase text-slate-600 dark:text-slate-300 font-semibold mb-1.5 sm:mb-2"
                   >
                     Message <span className="text-blue-500">*</span>
                   </label>
@@ -330,11 +352,11 @@ export default function Contact() {
                     id="contact-message"
                     name="message"
                     required
-                    rows={5}
+                    rows={4}
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Tell me about your project, timeline, or inquiry..."
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-sm resize-none"
+                    className="w-full px-3.5 py-2.5 sm:px-4 sm:py-3 rounded-xl border border-slate-300 dark:border-slate-700 bg-white dark:bg-[#1e2535] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-blue-500 transition-all text-xs sm:text-sm resize-none"
                   />
                 </div>
 
@@ -343,12 +365,12 @@ export default function Contact() {
                   type="submit"
                   id="contact-submit-btn"
                   disabled={isSubmitting}
-                  className="w-full py-3.5 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] hover:opacity-95 shadow-lg shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99]"
+                  className="w-full py-3 sm:py-3.5 px-6 rounded-xl font-semibold text-white bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] hover:opacity-95 shadow-lg shadow-blue-500/25 transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed hover:scale-[1.01] active:scale-[0.99] text-xs sm:text-sm"
                 >
                   {isSubmitting ? (
                     <div className="flex items-center gap-2">
                       <svg
-                        className="animate-spin h-5 w-5 text-white"
+                        className="animate-spin h-4 w-4 text-white"
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
                         viewBox="0 0 24 24"

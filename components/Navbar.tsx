@@ -75,16 +75,16 @@ export default function Navbar() {
         <Link
           href="/#home"
           id="nav-logo"
-          className="group flex items-center gap-2 text-xl font-bold tracking-tight focus:outline-none"
+          className="group flex items-center gap-2 text-lg sm:text-xl font-bold tracking-tight focus:outline-none shrink-0"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#4f8ef7] to-[#8b5cf6] p-[1.5px] transition-transform duration-300 group-hover:scale-105 shadow-md shadow-blue-500/20">
+          <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-gradient-to-tr from-[#4f8ef7] to-[#8b5cf6] p-[1.5px] transition-transform duration-300 group-hover:scale-105 shadow-md shadow-blue-500/20">
             <div className="w-full h-full bg-white dark:bg-[#0d1117] rounded-[10px] flex items-center justify-center">
-              <span className="font-mono text-base font-extrabold bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] bg-clip-text text-transparent">
+              <span className="font-mono text-xs sm:text-base font-extrabold bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] bg-clip-text text-transparent">
                 SA
               </span>
             </div>
           </div>
-          <span className="font-mono text-lg font-bold tracking-wide text-slate-800 dark:text-white group-hover:text-blue-500 transition-colors">
+          <span className="font-mono text-base sm:text-lg font-bold tracking-wide text-slate-800 dark:text-white group-hover:text-blue-500 transition-colors">
             Shahriar<span className="text-[#4f8ef7]">.dev</span>
           </span>
         </Link>

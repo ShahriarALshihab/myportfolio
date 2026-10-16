@@ -8,8 +8,7 @@ import { SiGithub } from "react-icons/si";
 import { FaLinkedin } from "react-icons/fa";
 import { HiCode, HiSparkles } from "react-icons/hi";
 
-// TODO: Add developer's photo as public/hero-bg.jpg
-// A casual photo works perfectly — blur + dark overlay handles the rest
+
 
 const roles = [
   "Full Stack Developer",
@@ -25,7 +24,7 @@ export default function Hero() {
   const [typingSpeed, setTypingSpeed] = useState(120);
   const [imgError, setImgError] = useState(false);
 
-  // Typewriter effect logic
+
   useEffect(() => {
     const fullRole = roles[currentRoleIndex];
 
@@ -35,7 +34,7 @@ export default function Hero() {
         setTypingSpeed(90);
 
         if (currentText.length + 1 === fullRole.length) {
-          // Pause at full word
+
           setTimeout(() => setIsDeleting(true), 1800);
         }
       } else {
@@ -80,7 +79,7 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden"
     >
-      {/* Background Layer with Next.js <Image /> */}
+
       {!imgError ? (
         <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
@@ -92,7 +91,7 @@ export default function Hero() {
             className="object-cover object-center filter blur-[2px] scale-105 transition-opacity duration-700"
             onError={() => setImgError(true)}
           />
-          {/* Ambient Lighting & Gradients */}
+
           <div className="absolute inset-0 bg-gradient-to-r from-[#f0f4ff]/95 via-[#f0f4ff]/85 to-[#f0f4ff]/70 dark:from-[#0a0a0f]/95 dark:via-[#0a0a0f]/85 dark:to-[#0a0a0f]/65" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#f0f4ff] via-transparent to-[#f0f4ff]/40 dark:from-[#0a0a0f] dark:via-transparent dark:to-[#0a0a0f]/50" />
         </div>
@@ -103,7 +102,7 @@ export default function Hero() {
         </div>
       )}
 
-      {/* Decorative Floating Tech Accents */}
+
       <div className="absolute top-28 right-12 lg:right-24 hidden lg:block z-10 pointer-events-none">
         <motion.div
           animate={{
@@ -173,7 +172,7 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Name Header */}
+
           <motion.h1
             variants={itemVariants}
             className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.1] mb-4"
@@ -184,7 +183,7 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* Typewriter Role Header */}
+
           <motion.div
             variants={itemVariants}
             className="h-10 sm:h-12 flex items-center justify-center sm:justify-start gap-1 font-mono text-xl sm:text-3xl font-bold text-slate-700 dark:text-slate-200 mb-6"
@@ -196,7 +195,7 @@ export default function Hero() {
             <span className="inline-block w-[3px] h-6 sm:h-8 bg-[#4f8ef7] ml-0.5 animate-pulse" />
           </motion.div>
 
-          {/* Bio text */}
+
           <motion.p
             variants={itemVariants}
             className="max-w-2xl text-base sm:text-lg md:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-8 text-center sm:text-left"
@@ -205,21 +204,20 @@ export default function Hero() {
             Next.js, and Node.js. I build things that live on the internet.
           </motion.p>
 
-          {/* Action Buttons Row */}
+
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center sm:justify-start gap-4 mb-10 w-full"
           >
-            {/* Download CV button */}
-            {/* TODO: Replace cv-placeholder.pdf with real CV */}
+
             <a
-              href="/cv-placeholder.pdf"
-              download="Shahriar_Al_Shihab_CV.pdf"
+              href="/Shahriar Al Shihab_cv.pdf"
+              download="Shahriar_Al_Shihab(CV).pdf"
               id="hero-download-cv-btn"
               className="relative group overflow-hidden px-6 py-3.5 rounded-full font-medium text-white shadow-lg shadow-blue-500/25 hover:shadow-blue-500/40 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2.5"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-[#4f8ef7] to-[#8b5cf6] transition-transform duration-300 group-hover:scale-105" />
-              {/* Shine effect */}
+
               <span className="absolute top-0 -left-[100%] w-full h-full bg-gradient-to-r from-transparent via-white/25 to-transparent transition-all duration-700 group-hover:left-[100%]" />
               <FiDownload className="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:-translate-y-0.5" />
               <span className="relative z-10 text-sm font-semibold tracking-wide">Download CV</span>

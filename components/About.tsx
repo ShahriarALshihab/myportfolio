@@ -64,23 +64,23 @@ export default function About() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
           {/* Left Column: Narrative Card */}
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="lg:col-span-7 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/70 backdrop-blur-xl p-8 sm:p-10 shadow-xl shadow-black/5 dark:shadow-blue-950/20 relative overflow-hidden"
+            className="lg:col-span-7 rounded-3xl border border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-[#161b27]/70 backdrop-blur-xl p-5 sm:p-8 lg:p-10 shadow-xl shadow-black/5 dark:shadow-blue-950/20 relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-blue-500/10 to-transparent rounded-bl-full pointer-events-none" />
             
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white mb-4">
+            <h3 className="text-lg sm:text-2xl font-bold text-slate-900 dark:text-white mb-4 leading-snug">
               Passionate developer bridging design and scalable engineering
             </h3>
             
-            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4 text-base sm:text-lg">
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-4 text-sm sm:text-base md:text-lg">
               Hello! I&apos;m <span className="font-semibold text-blue-600 dark:text-blue-400">Shahriar Al Shihab</span>, a full-stack developer based in Dhaka, Bangladesh. Currently completing my B.Sc. in Computer Science &amp; Engineering at the University of Liberal Arts Bangladesh (ULAB), I build responsive, production-ready applications with strong attention to both user interface fidelity and backend reliability.
             </p>
 
-            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6 text-base sm:text-lg">
+            <p className="text-slate-600 dark:text-slate-300 leading-relaxed mb-6 text-sm sm:text-base md:text-lg">
               My core technology stack revolves around <span className="text-slate-900 dark:text-white font-medium">React, Next.js (App Router), Node.js, Express, and MongoDB</span>. I take pride in crafting smooth interactive experiences with Framer Motion, robust REST APIs, and leveraging modern AI-assisted engineering workflows to ship features faster and with higher code quality.
             </p>
 
